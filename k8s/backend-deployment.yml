@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instagram-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: instagram-backend
+  template:
+    metadata:
+      labels:
+        app: instagram-backend
+    spec:
+      containers:
+      - name: backend
+        image: 297128512145.dkr.ecr.ap-south-1.amazonaws.com/instagram-backend:latest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - secretRef:
+            name: instagram-secrets
